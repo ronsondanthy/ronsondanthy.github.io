@@ -5,143 +5,560 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RONSON DANTHY</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+        :root {
+            --paper: #f3f1eb;
+            --ink: #1f2226;
+            --muted: #59606a;
+            --line: #c9c4b7;
+            --accent: #2f3a4a;
+            --max: 860px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            margin: 20px;
-            background-color: #f5f7f6;
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Work Sans', sans-serif;
+            color: var(--ink);
+            line-height: 1.6;
+            background:
+                radial-gradient(circle at 12% 10%, #ffffff 0%, rgba(255, 255, 255, 0) 46%),
+                linear-gradient(175deg, #efede6 0%, var(--paper) 32%, #ece8dd 100%);
+            padding: 2.4rem 1.2rem;
+        }
+
+        .page-layout {
+            width: min(100%, 1180px);
+            margin: 0 auto;
+            padding-left: 220px;
+            position: relative;
+        }
+
+        .photo-rail {
+            position: fixed;
+            top: 2rem;
+            display: grid;
+            justify-items: center;
+            gap: 0.7rem;
+            padding-top: 0.5rem;
+            width: 188px;
+            left: max(1rem, calc((100vw - 1180px) / 2 + 1rem));
+            z-index: 2;
+        }
+
+        .avatar-shell {
+            width: 172px;
+            height: 172px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.96);
+            box-shadow: 0 16px 34px -20px rgba(25, 31, 40, 0.85);
+            background: #d6d8dc;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(100%) saturate(85%);
+            transform: scale(1);
+            transition: filter 200ms linear, transform 200ms linear;
+        }
+
+        .rail-contact {
+            width: 100%;
+            padding: 0;
+            font-size: 0.84rem;
+            color: var(--muted);
+        }
+
+        .rail-contact h3 {
+            margin: 0 0 0.45rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .rail-contact ul {
+            gap: 0.16rem;
+        }
+
+        .rail-contact p,
+        .rail-contact li {
+            margin: 0;
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        .rail-contact a {
+            color: #24364d;
+        }
+
+        .resume {
+            width: 100%;
+            max-width: var(--max);
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(201, 196, 183, 0.75);
+            border-radius: 12px;
+            box-shadow: 0 22px 60px -40px rgba(18, 20, 24, 0.65);
+            overflow: hidden;
+            animation: rise 0.6s ease-out;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header {
+            padding: 2.2rem 2rem 1.3rem;
+            border-bottom: 1px solid var(--line);
+            position: relative;
             text-align: center;
         }
 
-        section {
-            margin-bottom: 20px;
+        h1 {
+            margin: 0;
+            font-family: 'Cardo', serif;
+            letter-spacing: 0.06em;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            color: #111317;
         }
 
-        h1, h2 {
-            color: #333;
+        .subtitle {
+            margin: 0.4rem 0 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+            letter-spacing: 0.02em;
+        }
+
+        main {
+            padding: 1.1rem 2rem 1.4rem;
+        }
+
+        section {
+            padding: 1rem 0 1.1rem;
+            border-bottom: 1px solid rgba(201, 196, 183, 0.64);
+        }
+
+        section:last-child {
+            border-bottom: 0;
         }
 
         h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin-bottom: 5px;
+            margin: 0 0 0.72rem;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--accent);
         }
 
         p {
+            margin: 0.25rem 0;
+        }
+
+        ul {
             margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 0.28rem;
         }
-        .links {
-            text-decoration: none;
-            color: #f18305;
-            font-size: large;
+
+        a {
+            color: #26384f;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
         }
-        .emails {
-            text-decoration: none;
-            color: #f10890;
-            font-size: large;}
-        .projects {
-            text-decoration: none;
-            color: #08b67c;
-            font-size: medium;
+
+        a:hover {
+            color: #111827;
+        }
+
+        .project {
+            margin-bottom: 0.88rem;
+        }
+
+        .project strong {
+            font-family: 'Cardo', serif;
+            font-size: 1.03rem;
+            font-weight: 700;
+        }
+
+        footer {
+            padding: 1.2rem 2rem 1.8rem;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        @media (max-width: 980px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+
+            .page-layout {
+                display: block;
+                padding-left: 0;
+            }
+
+            .photo-rail {
+                position: static;
+                justify-items: start;
+                margin: 0 0 0.95rem;
+                padding-top: 0;
+            }
+
+            .avatar-shell {
+                width: 124px;
+                height: 124px;
+            }
+
+            .rail-contact {
+                width: min(100%, 360px);
+            }
+
+            .resume {
+                max-width: 100%;
+            }
+
+            header,
+            main,
+            footer {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            h2 {
+                letter-spacing: 0.11em;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="page-layout">
+        <aside class="photo-rail" aria-label="Profile photo">
+            <div class="avatar-shell">
+                <img id="profile-image" alt="Profile photo" />
+            </div>
+            <section class="rail-contact" id="rail-contact" hidden>
+                <h3>Contact</h3>
+                <div id="rail-contact-content"></div>
+            </section>
+        </aside>
 
-    <header>
-        <h1>RONSON DANTHY</h1>
-        <p>App Developer · Software Engineer · Data Analyst · Web Developer</p>
-    </header>
+        <article class="resume">
+            <header>
+                <h1 id="name">Loading...</h1>
+                <p class="subtitle" id="tagline">Loading profile...</p>
+            </header>
 
-    <section>
-        <h2>Contact Information</h2>
-        <ul>
-            <li><a class="emails" target="_blank" href="mailto:ronson.mitmpl2022@learner.manipal.edu">Email: ronson.mitmpl2022@learner.manipal.edu</a></li>
-            <li><a class="emails" target="_blank" href="mailto:danthyronson@gmail.com">Email: danthyronson@gmail.com</a></li>
-            <li>Phone: +91 8618093419</li>
-            <li><a class="links" href="https://www.linkedin.com/in/ronson-danthy-59574a242" target="_blank">LinkedIn</a></li>
-            <li><a class="links" href="https://github.com/ronsondanthy" target="_blank">GitHub</a></li>
-           
-        </ul>
-    </section>
+            <main id="sections"></main>
+            <footer id="footer"></footer>
+        </article>
+    </div>
 
-    <section>
-        <h2>Education</h2>
-        <p><strong>Masters of Computer Applications (MCA)</strong></p>
-        <p>Manipal Institute of Technology, 2022-2024</p>
-        <p>CGPA: 8.17</p>
-        <p>Subjects- C++, java,  SQL, operating systems, Data Analytics, Web Development, Machine Learning, Networking, IOT</p>
-    </section>
+    <script>
+        const INLINE_MARKDOWN = /!\[(.*?)\]\((.+?)\)|\*\*\*(.+?)\*\*\*|\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((.+?)\)/g;
 
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li><strong>Programming Languages:</strong> C, C++, Java, Python. </li>
-            <li><strong>Libraries/Frameworks:</strong>Django, React.js</li>
-            <li><strong>Frontend:</strong> HTML5, CSS, JavaScript, Bootstrap </li>
-            <li><strong>Backend:</strong>Php,Node.js, Django</li>
-            <li><strong>Databases:</strong>MySql, Sqlite. </li>
-            <li><strong>App Development:</strong>Android Studio.</li>
-            <li><strong>Design:</strong>Figma. </li>
-            <li><strong>Machine Learning:</strong>MATLAB, Python -Pandas, NumPy, Matplotlib.</li>
-            
-        </ul>
-    </section>
+        function normalizeHeading(value) {
+            return value.trim().toLowerCase();
+        }
 
-    <section>
-        <h2>Experience</h2>
-        <p>I am a Fresher</p>
-    </section>
-    <section>
-        <h2>Projects</h2>
-        <p><strong>•Online E-Book Store</strong></p>
-        <a href="https://github.com/ronsondanthy/ebook-finder" class="projects">Click Here</a>
-        <p>An interactive website for students to access educational materials built using Php, Html, CSS, JavaScript and Bootstrap</p>
-        <br>
-        <p><strong>•Automatic 3-Phase Motor Starter for Pump</strong></p>
-        <a href="https://github.com/ronsondanthy/arduno" class="projects">Click Here</a>
-        <p>A fully integrated system with water level indicator and double phase protection using Arduino - IoT Based Project.</p>
-        <br>
-        <p><strong>•Poll Application in Django</strong></p>
-        <a href="https://github.com/ronsondanthy/Projects" class="projects">Click Here</a>
-        <p>A basic poll application which consists of two parts: A public site that lets people view polls and vote in them. An admin site that lets you add, change, and delete polls.</p>
-        <br>
-        <p><strong>•Weather Monitoring Station</strong></p>
-        <a href="https://github.com/ronsondanthy/weather-Monitoring" class="projects">Click Here</a>
-        <p>Circuit built using Arduino Uno, DHT11 sensor and ESP8266-01 Wi-Fi  transmitter which transmits local weather and humidity data to ThingSpeak IoT cloud. This data can be accessed and analysed anywhere in the world.</p>
-    
-    </section>
-    <section>
-        <h2>Certifications</h2>
-        <ul>
-            <li>•	Introduction to Git and GitHub- Google</li>
-            <li>•	Programming for Everybody (Getting Started with Python) - University of Michigan</li>
-            <li>•	SQL(Basic)-HackerRank</li>
-            <li>•	Neural Networks and Deep Learning - DeepLearning.AI</li>
-            <li>•	Google Cloud (Google Cloud Fundamentals: Core Infrastructure)- Google</li>
-            <li>•	Developing Back-End Apps with Node.js and Express -IBM</li>
-            <li>•	Django for Everybody - University of Michigan</li>
-            <li>•	React Basics - Meta</li>
+        function renderInlineMarkdown(text) {
+            const escaped = text
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
 
-        </ul>
-    </section>
-    <footer>
-            <p><strong>DECLARATION:</strong> I, Ronson Danthy, hereby declare that the above information provided by me is true and have all the relevant documents to authenticate the same.</p>
-        <p>© 2023 Ronson Danthy</p>
-    </footer>
+            return escaped.replace(INLINE_MARKDOWN, (_, imageAlt, imageSrc, strongEmText, strongText, emText, linkLabel, linkHref) => {
+                if (imageSrc) {
+                    const safeSrc = imageSrc.replaceAll('"', '&quot;');
+                    const safeAlt = (imageAlt || "").replaceAll('"', '&quot;');
+                    return `<img src="${safeSrc}" alt="${safeAlt}" width="30" height="30" style="vertical-align: middle; margin-right: 14px; margin-top: 10px;" />`;
+                }
 
-    
+                if (strongEmText) {
+                    return `<strong><em>${strongEmText}</em></strong>`;
+                }
+
+                if (strongText) {
+                    return `<strong>${strongText}</strong>`;
+                }
+
+                if (emText) {
+                    return `<em>${emText}</em>`;
+                }
+
+                if (linkLabel && linkHref) {
+                    const safeHref = linkHref.replaceAll('"', "&quot;");
+                    return `<a href="${safeHref}" target="_blank" rel="noopener noreferrer">${linkLabel}</a>`;
+                }
+
+                return _;
+            });
+        }
+
+        function parseReadme(markdown) {
+            const lines = markdown.split(/\r?\n/);
+            const data = {
+                name: "",
+                subtitle: "",
+                profilePhoto: "",
+                profilePhotoAlt: "Profile photo",
+                sections: {},
+                sectionOrder: [],
+                declaration: [],
+                copyright: ""
+            };
+
+            let currentSection = "";
+
+            for (const rawLine of lines) {
+                const line = rawLine.trim();
+
+                if (!line) {
+                    if (currentSection) {
+                        data.sections[currentSection].push("");
+                    }
+                    continue;
+                }
+
+                if (line.startsWith("# ")) {
+                    data.name = line.slice(2).trim();
+                    continue;
+                }
+
+                if (line.startsWith("## ")) {
+                    currentSection = normalizeHeading(line.slice(3));
+                    data.sections[currentSection] = data.sections[currentSection] || [];
+                    data.sectionOrder.push(currentSection);
+                    continue;
+                }
+
+                if (!currentSection) {
+                    const imageMatch = line.match(/^!\[(.*?)\]\((.+?)(?:\s+".*?")?\)$/);
+                    if (imageMatch) {
+                        data.profilePhotoAlt = imageMatch[1] || "Profile photo";
+                        data.profilePhoto = imageMatch[2].trim() || "";
+                        continue;
+                    }
+                }
+
+                if (!currentSection && !data.subtitle) {
+                    data.subtitle = line;
+                    continue;
+                }
+
+                if (currentSection) {
+                    data.sections[currentSection].push(line);
+                }
+            }
+
+            const declarationContent = data.sections.declaration || [];
+            const footerLines = declarationContent.filter((line) => line);
+            if (footerLines.length) {
+                const maybeCopyright = footerLines[footerLines.length - 1];
+                if (maybeCopyright.startsWith("©")) {
+                    data.copyright = maybeCopyright;
+                    data.declaration = footerLines.slice(0, -1);
+                } else {
+                    data.declaration = footerLines;
+                }
+            }
+
+            return data;
+        }
+
+        function asHtmlBlocks(lines) {
+            const nonEmpty = lines.filter((line) => line !== "");
+            if (!nonEmpty.length) {
+                return "<p>Update this section in README.md.</p>";
+            }
+
+            const allBullets = nonEmpty.every((line) => /^[-*]\s+/.test(line));
+            if (allBullets) {
+                const items = nonEmpty
+                    .map((line) => line.replace(/^[-*]\s+/, ""))
+                    .map((line) => `<li>${renderInlineMarkdown(line)}</li>`)
+                    .join("");
+                return `<ul>${items}</ul>`;
+            }
+
+            let html = "";
+            for (const line of lines) {
+                if (!line) {
+                    continue;
+                }
+
+                if (line.startsWith("### ")) {
+                    html += `<p><strong>${renderInlineMarkdown(line.slice(4))}</strong></p>`;
+                    continue;
+                }
+
+                if (/^[-*]\s+/.test(line)) {
+                    html += `<p>${renderInlineMarkdown(line.replace(/^[-*]\s+/, ""))}</p>`;
+                    continue;
+                }
+
+                html += `<p>${renderInlineMarkdown(line)}</p>`;
+            }
+
+            return html;
+        }
+
+        function loadImageCandidate(src) {
+            return new Promise((resolve) => {
+                const probe = new Image();
+                probe.onload = () => resolve(src);
+                probe.onerror = () => resolve("");
+                probe.src = src;
+            });
+        }
+
+        async function setProfileImage(data) {
+            const image = document.getElementById("profile-image");
+            const requested = data.profilePhoto || "profile.jpg";
+            const normalized = requested.replace(/^<|>$/g, "").trim();
+            const cleaned = normalized
+                .replace(/^['"]|['"]$/g, "")
+                .replace(/[?#].*$/, "");
+            const fileName = cleaned.split("/").pop() || "profile.jpg";
+            const decoded = (() => {
+                try {
+                    return decodeURIComponent(cleaned);
+                } catch {
+                    return cleaned;
+                }
+            })();
+
+            const variants = [
+                normalized,
+                cleaned,
+                cleaned.replace(/^\.\//, ""),
+                cleaned.startsWith("./") ? cleaned : `./${cleaned}`,
+                fileName,
+                `./${fileName}`,
+                "profile.jpg",
+                "./profile.jpg",
+                decoded,
+                encodeURI(decoded)
+            ];
+
+            const uniqueCandidates = [...new Set(variants.filter(Boolean))];
+            image.alt = data.profilePhotoAlt || "Profile photo";
+            image.style.display = "none";
+
+            let resolvedSrc = "";
+            for (const candidate of uniqueCandidates) {
+                resolvedSrc = await loadImageCandidate(candidate);
+                if (resolvedSrc) {
+                    break;
+                }
+            }
+
+            if (!resolvedSrc) {
+                return;
+            }
+
+            image.src = resolvedSrc;
+            image.style.display = "block";
+        }
+
+        function updatePhotoScrollEffect() {
+            const image = document.getElementById("profile-image");
+            if (!image || image.style.display === "none") {
+                return;
+            }
+
+            const doc = document.documentElement;
+            const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+            const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+            const grayscale = 100 - progress * 100;
+            const saturation = 85 + progress * 30;
+            const scale = 1 + progress * 0.03;
+
+            image.style.filter = `grayscale(${grayscale.toFixed(1)}%) saturate(${saturation.toFixed(1)}%)`;
+            image.style.transform = `scale(${scale.toFixed(3)})`;
+        }
+
+        function renderPage(data) {
+            document.getElementById("name").textContent = data.name || "Your Name";
+            document.getElementById("tagline").textContent = data.subtitle || "Add your tagline below the H1 heading in README.md";
+            setProfileImage(data);
+
+            const container = document.getElementById("sections");
+            container.innerHTML = "";
+
+            const contactSectionKeys = ["contact information", "contact"];
+            const contactKey = contactSectionKeys.find((key) => data.sections[key] && data.sections[key].length);
+            const railContact = document.getElementById("rail-contact");
+            const railContactContent = document.getElementById("rail-contact-content");
+
+            if (contactKey) {
+                railContactContent.innerHTML = asHtmlBlocks(data.sections[contactKey]);
+                railContact.hidden = false;
+            } else {
+                railContactContent.innerHTML = "";
+                railContact.hidden = true;
+            }
+
+            const orderedSections = data.sectionOrder.filter((key) => key !== "declaration" && key !== contactKey);
+
+            for (const sectionKey of orderedSections) {
+                const lines = data.sections[sectionKey] || [];
+                const section = document.createElement("section");
+                const heading = document.createElement("h2");
+                heading.textContent = sectionKey.replace(/\b\w/g, (char) => char.toUpperCase());
+                section.appendChild(heading);
+                section.innerHTML += asHtmlBlocks(lines);
+                container.appendChild(section);
+            }
+
+            const footer = document.getElementById("footer");
+            const declarationText = data.declaration.length
+                ? data.declaration.join(" ")
+                : "Add ## Declaration in README.md for footer text.";
+
+            footer.innerHTML = `<p><strong>Declaration:</strong> ${renderInlineMarkdown(declarationText)}</p><p>${renderInlineMarkdown(data.copyright || "© 2026")}</p>`;
+        }
+
+        async function init() {
+            try {
+                const response = await fetch("README.md", { cache: "no-cache" });
+                if (!response.ok) {
+                    throw new Error("Could not read README.md");
+                }
+
+                const markdown = await response.text();
+                const parsed = parseReadme(markdown);
+                renderPage(parsed);
+                updatePhotoScrollEffect();
+            } catch (error) {
+                document.getElementById("sections").innerHTML = "<section><h2>Error</h2><p>Unable to load README.md. Make sure this file exists at the project root.</p></section>";
+            }
+        }
+
+        window.addEventListener("scroll", updatePhotoScrollEffect, { passive: true });
+        window.addEventListener("resize", updatePhotoScrollEffect);
+
+        init();
+    </script>
 
 </body>
 </html>
