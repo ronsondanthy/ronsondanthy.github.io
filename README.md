@@ -2,8 +2,6 @@
 
 Full Stack Developer | AI & ML
 
-![Ronson Danthy](profile.jpg)
-
 ## Contact Information
 
 - [ronsondanthy@gmail.com](mailto:ronsondanthy@gmail.com)
@@ -29,11 +27,6 @@ Subjects: C++, Java, DSA, SQL, Operating Systems, Data Analytics, Web Developmen
 - **Machine Learning:** Python (Pandas, NumPy, Matplotlib, Scikit-learn)
 - **Deep Learning:** TensorFlow, Keras, PyTorch, CNN
 - **Tools:** Git, Docker, Arduino
-
-
-![Java](https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg) ![Python](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg) ![Node.js](https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg) ![Vue.js](https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg) ![Docker](https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg) ![TensorFlow](https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg) ![Git](https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg)
-
-
 ## Experience
 ### Member of Technical Staff
 **Manipal Dot Net Pvt Ltd.** | May 2024 - Present (2 years)
@@ -72,12 +65,12 @@ Built with Arduino Uno, DHT11 sensor, and ESP8266-01 to transmit local weather d
 
 ## Certifications
 
-- ![Google](https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg) Introduction to Git and GitHub
-- ![University of Michigan](https://upload.wikimedia.org/wikipedia/commons/f/fb/Michigan_Wolverines_logo.svg) Programming for Everybody (Getting Started with Python) - University of Michigan 
--  ![DeepLearning.AI](deeplearningai_logo.jpeg) Neural Networks and Deep Learning
-- ![Google](https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg) Google Cloud Fundamentals: Core Infrastructure
-- ![IBM](https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg) Developing Back-End Apps with Node.js and Express
-- ![University of Michigan](https://upload.wikimedia.org/wikipedia/commons/f/fb/Michigan_Wolverines_logo.svg) Django for Everybody - University of Michigan
+- Introduction to Git and GitHub
+- Programming for Everybody (Getting Started with Python) - University of Michigan
+- Neural Networks and Deep Learning
+- Google Cloud Fundamentals: Core Infrastructure
+- Developing Back-End Apps with Node.js and Express
+- Django for Everybody - University of Michigan
 
 ## Declaration
 

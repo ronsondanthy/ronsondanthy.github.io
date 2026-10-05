@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RONSON DANTHY</title>
+    <meta name="description" content="Ronson Danthy is a full stack developer specializing in web applications, AI, machine learning, and backend development.">
+    <meta name="author" content="Ronson Danthy">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ronsondanthy.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ronsondanthy.github.io/">
+    <meta property="og:title" content="Ronson Danthy | Full Stack Developer">
+    <meta property="og:description" content="Portfolio and professional resume of Ronson Danthy, a full stack developer specializing in AI and machine learning.">
+    <meta property="og:image" content="https://ronsondanthy.github.io/images/profile.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Ronson Danthy | Full Stack Developer">
+    <meta name="twitter:description" content="Portfolio and professional resume of Ronson Danthy, a full stack developer specializing in AI and machine learning.">
+    <meta name="twitter:image" content="https://ronsondanthy.github.io/images/profile.jpg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap');
 
@@ -201,6 +214,27 @@
             font-weight: 700;
         }
 
+        .skill-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .skill-icons img,
+        .certification-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            vertical-align: middle;
+        }
+
+        .certification-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
         footer {
             padding: 1.2rem 2rem 1.8rem;
             color: var(--muted);
@@ -254,7 +288,7 @@
     <div class="page-layout">
         <aside class="photo-rail" aria-label="Profile photo">
             <div class="avatar-shell">
-                <img id="profile-image" alt="Profile photo" />
+                <img id="profile-image" src="images/profile.jpg" alt="Ronson Danthy" />
             </div>
             <section class="rail-contact" id="rail-contact" hidden>
                 <h3>Contact</h3>
@@ -275,6 +309,25 @@
 
     <script>
         const INLINE_MARKDOWN = /!\[(.*?)\]\((.+?)\)|\*\*\*(.+?)\*\*\*|\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((.+?)\)/g;
+
+        const SKILL_LOGOS = [
+            ["Java", "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg"],
+            ["Python", "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"],
+            ["Node.js", "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"],
+            ["Vue.js", "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"],
+            ["Docker", "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg"],
+            ["TensorFlow", "https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg"],
+            ["Git", "https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg"]
+        ];
+
+        const CERTIFICATION_LOGOS = [
+            ["Google", "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"],
+            ["University of Michigan", "https://upload.wikimedia.org/wikipedia/commons/f/fb/Michigan_Wolverines_logo.svg"],
+            ["DeepLearning.AI", "images/deeplearningai_logo.jpeg"],
+            ["Google", "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"],
+            ["IBM", "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg"],
+            ["University of Michigan", "https://upload.wikimedia.org/wikipedia/commons/f/fb/Michigan_Wolverines_logo.svg"]
+        ];
 
         function normalizeHeading(value) {
             return value.trim().toLowerCase();
@@ -422,6 +475,24 @@
             return html;
         }
 
+        function renderSkillLogos() {
+            return `<div class="skill-icons" aria-label="Technology logos">${SKILL_LOGOS
+                .map(([alt, src]) => `<img src="${src}" alt="${alt}" title="${alt}" />`)
+                .join("")}</div>`;
+        }
+
+        function renderCertifications(lines) {
+            const items = lines
+                .filter((line) => /^[-*]\s+/.test(line))
+                .map((line, index) => {
+                    const text = line.replace(/^[-*]\s+/, "");
+                    const logo = CERTIFICATION_LOGOS[index];
+                    return `<li><img class="certification-icon" src="${logo[1]}" alt="${logo[0]}" title="${logo[0]}" /><span>${renderInlineMarkdown(text)}</span></li>`;
+                })
+                .join("");
+            return `<ul class="certification-list">${items}</ul>`;
+        }
+
         function loadImageCandidate(src) {
             return new Promise((resolve) => {
                 const probe = new Image();
@@ -433,7 +504,7 @@
 
         async function setProfileImage(data) {
             const image = document.getElementById("profile-image");
-            const requested = data.profilePhoto || "profile.jpg";
+            const requested = data.profilePhoto || "images/profile.jpg";
             const normalized = requested.replace(/^<|>$/g, "").trim();
             const cleaned = normalized
                 .replace(/^['"]|['"]$/g, "")
@@ -452,10 +523,10 @@
                 cleaned,
                 cleaned.replace(/^\.\//, ""),
                 cleaned.startsWith("./") ? cleaned : `./${cleaned}`,
-                fileName,
-                `./${fileName}`,
-                "profile.jpg",
-                "./profile.jpg",
+                `images/${fileName}`,
+                `./images/${fileName}`,
+                "images/profile.jpg",
+                "./images/profile.jpg",
                 decoded,
                 encodeURI(decoded)
             ];
@@ -526,7 +597,14 @@
                 const heading = document.createElement("h2");
                 heading.textContent = sectionKey.replace(/\b\w/g, (char) => char.toUpperCase());
                 section.appendChild(heading);
-                section.innerHTML += asHtmlBlocks(lines);
+                if (sectionKey === "certifications") {
+                    section.innerHTML += renderCertifications(lines);
+                } else {
+                    section.innerHTML += asHtmlBlocks(lines);
+                }
+                if (sectionKey === "skills") {
+                    section.innerHTML += renderSkillLogos();
+                }
                 container.appendChild(section);
             }
 
